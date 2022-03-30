@@ -23,7 +23,7 @@ const Modal = ({ setModal, setAnimarModal, animarModal, guardarGasto }) => {
             setMensaje('Todos los campos son obligatorios')
         }
 
-        guardarGasto({ nombre, cantidad, categoria })
+        guardarGasto({ nombre, cantidad, categoria }, ocultarModal)
     }
 
     return (
@@ -59,10 +59,10 @@ const Modal = ({ setModal, setAnimarModal, animarModal, guardarGasto }) => {
                     <label htmlFor="cantidad">Cantidad</label>
                     <input
                         id='cantidad'
-                        type='text'
+                        type='number'
                         placeholder='Añade la cantidad del gasto: ej. 300'
                         value={cantidad}
-                        onChange={evt => setCantidad(evt.target.value)}
+                        onChange={evt => setCantidad(Number(evt.target.value))}
                     />
                 </div>
 
