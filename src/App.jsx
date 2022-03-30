@@ -9,9 +9,9 @@ const App = () => {
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false)
   const [animarModal, setAnimarModal] = useState(false)
   const [presupuesto, setPresupuesto] = useState('')
+  const [gastoEditar, setGastoEditar] = useState({})
   const [modal, setModal] = useState(false)
   const [gastos, setGastos] = useState([])
-  const [gastoEditar, setGastoEditar] = useState({})
 
   useEffect(() => {
     if (Object.keys(gastoEditar).length > 0) {
@@ -28,12 +28,25 @@ const App = () => {
   }
 
   const guardarGasto = (gasto, callback) => {
-    gasto.id = generarId()
-    gasto.fecha = Date.now()
-    
-    setGastos([...gastos, gasto])
+    if (gasto.id) {
+      const gastosActualizados = gastos.map(gastoState => gastoState.id === gasto.id ? gasto : gastoState)
+
+      setGastos(gastosActualizados)
+    }
+    else {
+      gasto.id = generarId()
+      gasto.fecha = Date.now()
+
+      setGastos([...gastos, gasto])
+    }
 
     callback()
+  }
+
+  const eliminarGasto = (id) => {
+    const gastosActualizados = gastos.filter(gasto => gasto.id !== id)
+
+    setGastos(gastosActualizados)
   }
 
   return (
@@ -49,7 +62,11 @@ const App = () => {
       {isValidPresupuesto && (
         <>
           <main>
-            <ListadoGastos gastos={gastos} setGastoEditar={setGastoEditar} />
+            <ListadoGastos
+              gastos={gastos}
+              setGastoEditar={setGastoEditar}
+              eliminarGasto={eliminarGasto}
+            />
           </main>
           <div className='nuevo-gasto'>
             <img
@@ -67,6 +84,8 @@ const App = () => {
           setAnimarModal={setAnimarModal}
           animarModal={animarModal}
           guardarGasto={guardarGasto}
+          gastoEditar={gastoEditar}
+          setGastoEditar={setGastoEditar}
         />
       )}
     </div>
