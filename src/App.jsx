@@ -8,7 +8,9 @@ import { useState, useEffect } from 'react'
 const App = () => {
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false)
   const [animarModal, setAnimarModal] = useState(false)
-  const [presupuesto, setPresupuesto] = useState('')
+  const [presupuesto, setPresupuesto] = useState(
+    localStorage.getItem('presupuesto') ?? ''
+  )
   const [gastoEditar, setGastoEditar] = useState({})
   const [modal, setModal] = useState(false)
   const [gastos, setGastos] = useState([])
@@ -18,6 +20,19 @@ const App = () => {
       handleNuevoGasto()
     }
   }, [gastoEditar])
+
+  useEffect(() => {
+    localStorage.setItem('presupuesto', presupuesto ?? 0)
+  }, [presupuesto])
+
+  useEffect(() => {
+    const presupuestoLS = Number(localStorage.getItem('presupuesto') ?? 0)
+
+    if (presupuestoLS > 0) {
+      setPresupuesto(presupuestoLS)
+      setIsValidPresupuesto(true)
+    }
+  }, [])
 
   const handleNuevoGasto = () => {
     setModal(true)
