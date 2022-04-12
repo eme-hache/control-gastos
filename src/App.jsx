@@ -1,5 +1,6 @@
 import ListadoGastos from './components/LIstadoGastos'
 import IconoNuevoGasto from './img/nuevo-gasto.svg'
+import Filtros from './components/Filtros'
 import Header from './components/Header'
 import Modal from './components/Modal'
 import { generarId } from './helpers'
@@ -11,9 +12,20 @@ const App = () => {
   const [presupuesto, setPresupuesto] = useState(
     localStorage.getItem('presupuesto') ?? ''
   )
+  const [gastos, setGastos] = useState(
+    localStorage.getItem('gastos') ? JSON.parse(localStorage.getItem('gastos')) : []
+  )
   const [gastoEditar, setGastoEditar] = useState({})
   const [modal, setModal] = useState(false)
-  const [gastos, setGastos] = useState([])
+  const [filtro, setFiltro] = useState('')
+  const [gastosFiltrados, setGastosFiltrados] = useState([])
+
+  useEffect(() => {
+    if (filtro) {
+      const gastosFiltrados = gastos.filter(gasto => gasto.categoria === filtro)
+      setGastosFiltrados(gastosFiltrados)
+    }
+  }, [filtro])
 
   useEffect(() => {
     if (Object.keys(gastoEditar).length > 0) {
@@ -24,6 +36,10 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('presupuesto', presupuesto ?? 0)
   }, [presupuesto])
+
+  useEffect(() => {
+    localStorage.setItem('gastos', JSON.stringify(gastos) ?? [])
+  }, [gastos])
 
   useEffect(() => {
     const presupuestoLS = Number(localStorage.getItem('presupuesto') ?? 0)
@@ -77,10 +93,14 @@ const App = () => {
       {isValidPresupuesto && (
         <>
           <main>
+            <Filtros filtro={filtro} setFiltro={setFiltro} />
+
             <ListadoGastos
               gastos={gastos}
               setGastoEditar={setGastoEditar}
               eliminarGasto={eliminarGasto}
+              filtro={filtro}
+              gastosFiltrados={gastosFiltrados}
             />
           </main>
           <div className='nuevo-gasto'>
