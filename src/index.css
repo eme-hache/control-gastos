@@ -166,7 +166,7 @@ header h1 {
     flex-direction: column;
 }
 .dos-columnas :first-child {
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 @media (min-width: 768px) {
     .dos-columnas {
@@ -183,7 +183,7 @@ header h1 {
 }
 .formulario input[type="text"].nuevo-presupuesto, 
 .formulario input[type="number"].nuevo-presupuesto {
-    font-size: 2.8rem;
+    font-size: 1.8rem;
     text-align: center;
 }
 
@@ -239,6 +239,11 @@ main {
     display: flex;
     align-items: center;
     gap: 2rem;
+}
+@media (max-width: 768px) {
+    .filtros .campo {
+        flex-flow: column;
+    }
 }
 .filtros label {
     font-size: 3rem;
@@ -322,8 +327,8 @@ main {
 
 .nuevo-gasto {
     position: fixed;
-    bottom: 5rem;
-    right: 5rem;
+    bottom: 20px;
+    right: 20px;
 }
 
 .nuevo-gasto img {
@@ -347,6 +352,7 @@ main {
     top: 3rem;
     width: 3rem;
     height: 3rem;
+    z-index: 1;
 }
 .modal .cerrar-modal img {
     width: 100%;
@@ -354,7 +360,7 @@ main {
 
 .modal .formulario {
     max-width: 80rem;
-    width: 40rem;
+    width: 30rem;
     transition-property: all;
     transition-duration: 300ms;
     transition-timing-function: ease-in;
