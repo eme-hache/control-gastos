@@ -10,5 +10,9 @@ https://control-gastos-eme-hache.vercel.app/
 
 ## Screenshot
 
-![Control de Gastos](/src/public/screenshot.png)
+<div align="center">
+
+  ![Control de Gastos](/src/public/screenshot.png)
+  
+</div>
 
