@@ -41,7 +41,10 @@ const Modal = ({
 
         if ([nombre, cantidad, categoria].includes('')) {
             setMensaje('Todos los campos son obligatorios')
+            return
         }
+
+        if (!animarModal) return 
 
         guardarGasto({ nombre, cantidad, categoria, id, fecha }, ocultarModal)
     }

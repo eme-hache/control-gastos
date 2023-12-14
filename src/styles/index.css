@@ -48,7 +48,7 @@ header {
 }
 
 header h1 {
-    padding: 3rem 0;
+    padding: 3rem 1rem;
     margin: 0;
     color: var(--blanco);
     text-align: center;
@@ -386,7 +386,7 @@ main {
     color: var(--blanco);
 }
 body .modal {
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .modal .formulario.animar {
