@@ -60,7 +60,7 @@ const ControlPresupuesto = ({
 
             <div className='contenido-presupuesto'>
                 <button className='reset-app' type='button' onClick={handleResetApp}>
-                    Resetear App
+                    Reiniciar
                 </button>
 
                 <p>
